@@ -1,0 +1,17 @@
+WA BADAK - paket aplikasi web Android
+
+Isi:
+- index.html: aplikasi utama
+- manifest.webmanifest: metadata instalasi
+- sw.js: cache offline dasar
+
+Cara memasang:
+1. Unggah seluruh isi folder ini ke hosting HTTPS milik Anda.
+2. Buka alamat website tersebut di Chrome Android.
+3. Pilih menu ⋮ > Tambahkan ke layar utama / Install app.
+4. Ikuti instruksi pemasangan.
+
+Catatan:
+- Paket ini adalah aplikasi web progresif (PWA), bukan APK native.
+- Tidak memodifikasi WhatsApp, tidak mengirim pesan otomatis, dan tidak menjamin anti-banned.
+- Gunakan WhatsApp Business resmi serta patuhi kebijakan WhatsApp.

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075e45"><link rel="manifest" href="manifest.webmanifest">
+<title>WA BADAK</title>
+<style>
+:root{--g:#075e45;--g2:#0c9b68;--bg:#f1f6f3;--ink:#18392e;--muted:#65766e;--line:#dce8e1;--white:#fff;--warn:#a65b00;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Arial;color:var(--ink)}
+header{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;padding:22px 18px 28px;border-radius:0 0 24px 24px}
+.top{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;border-radius:14px;background:#ffffff22;display:grid;place-items:center;font-size:24px}
+h1{font-size:23px;margin:0}header p{margin:9px 0 0;font-size:13px;opacity:.9;line-height:1.5}
+main{max-width:760px;margin:auto;padding:14px 14px 88px}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:-13px}
+.nav button{border:1px solid var(--line);background:white;color:var(--ink);padding:11px 4px;border-radius:13px;font-size:11px;font-weight:700;box-shadow:0 3px 10px #173b2b0a}
+.nav button.active{background:#e3f4eb;border-color:#9bd3b6;color:var(--g)}
+.panel{display:none}.panel.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:17px;margin-top:14px;box-shadow:0 4px 16px #18392e08}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:14px;margin:0 0 7px}
+p{line-height:1.5}.muted,.hint{color:var(--muted);font-size:12px;line-height:1.5}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#f5faf7;border-radius:13px;padding:13px}.stat b{display:block;font-size:19px;margin-top:4px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+textarea,input,select{width:100%;border:1px solid #cbdad1;border-radius:11px;padding:12px;background:white;color:var(--ink);font:inherit}
+textarea{min-height:120px;resize:vertical}
+button.action{border:0;border-radius:11px;padding:12px 15px;background:var(--g);color:#fff;font-weight:700;margin-top:10px;cursor:pointer}
+button.light{background:#e7f4ed;color:var(--g);margin-left:5px}
+.result{padding:13px;background:#f3f8f5;border-radius:12px;margin-top:12px;font-size:13px;line-height:1.5}
+li{margin:8px 0;line-height:1.45}.check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.check input{width:auto;margin-top:2px}
+.pill{display:inline-block;background:#e7f4ed;color:var(--g);font-size:11px;font-weight:700;padding:5px 9px;border-radius:30px}
+footer{text-align:center;padding:18px 0;color:var(--muted);font-size:11px}
+@media(min-width:650px){main{padding-left:20px;padding-right:20px}.nav button{font-size:13px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="logo">🛡️</div><div><h1>WA BADAK</h1><div style="font-size:11px;opacity:.85">Asisten WhatsApp Business</div></div><span style="margin-left:auto" class="pill">EDUKASI</span></div>
+<p>Bantu mengelola promosi dengan lebih tertib, menjaga privasi pelanggan, dan mengurangi risiko pesan dianggap spam.</p></header>
+<main>
+<nav class="nav">
+<button class="active" data-tab="home">🏠<br>Beranda</button><button data-tab="check">🔎<br>Cek Pesan</button><button data-tab="promo">✍️<br>Promosi</button><button data-tab="safety">🛡️<br>Keamanan</button>
+</nav>
+
+<section id="home" class="panel active">
+<div class="card"><h2>Ringkasan akun</h2><div class="stats">
+<div class="stat"><span class="muted">Checklist selesai</span><b id="doneCount">0/6</b></div>
+<div class="stat"><span class="muted">Pemeriksaan pesan</span><b id="checkCount">0</b></div>
+</div><p class="muted">WA BADAK adalah aplikasi pendamping. Aplikasi ini tidak terhubung ke akun WhatsApp dan tidak dapat membaca status blokir atau menjamin bebas banned.</p></div>
+<div class="card"><h2>Mulai dengan aman</h2><ul><li>Hubungi pelanggan yang sudah setuju menerima kabar.</li><li>Hentikan pesan jika pelanggan meminta berhenti.</li><li>Jangan mengirim pesan massal yang tidak diminta.</li><li>Gunakan WhatsApp Business resmi dan fitur resminya.</li></ul></div>
+</section>
+
+<section id="check" class="panel">
+<div class="card"><h2>Pemeriksa pesan</h2><p class="muted">Pemeriksaan lokal sederhana terhadap teks dan pola pengiriman. Bukan penilaian resmi WhatsApp.</p>
+<label for="msg">Teks promosi</label><textarea id="msg" placeholder="Tempel pesan promosi di sini..."></textarea>
+<label for="recipient">Status penerima</label><select id="recipient"><option value="yes">Sudah setuju menerima pesan</option><option value="no">Belum pernah setuju / tidak dikenal</option></select>
+<label for="pace">Pola pengiriman</label><select id="pace"><option value="low">Sesekali dan relevan</option><option value="high">Sering atau berulang</option><option value="bulk">Massal ke banyak kontak</option></select>
+<button class="action" id="runCheck">Periksa pesan</button><button class="action light" id="clearMsg">Hapus</button>
+<div id="checkResult" class="result" aria-live="polite">Hasil pemeriksaan akan muncul di sini.</div></div>
+</section>
+
+<section id="promo" class="panel">
+<div class="card"><h2>Pembuat pesan promosi</h2><p class="muted">Buat draf yang sopan. Periksa kembali kebenaran informasi sebelum dikirim.</p>
+<label for="product">Nama produk / info</label><input id="product" placeholder="Contoh: tempat penyimpanan serbaguna">
+<label for="benefit">Informasi singkat (tanpa klaim berlebihan)</label><input id="benefit" placeholder="Contoh: tersedia beberapa ukuran">
+<label for="cta">Ajakan</label><select id="cta"><option value="Jika Kakak ingin melihat detailnya, saya bisa kirim informasinya.">Tanya detail</option><option value="Jika tertarik, silakan lihat katalog toko kami.">Lihat katalog</option><option value="Bila tidak ingin menerima info seperti ini lagi, beri tahu saya ya.">Sertakan pilihan berhenti</option></select>
+<button class="action" id="makePromo">Buat draf</button><div id="promoResult" class="result">Draf pesan akan tampil di sini.</div><button class="action light" id="copyPromo">Salin draf</button></div>
+</section>
+
+<section id="safety" class="panel">
+<div class="card"><h2>Checklist keamanan</h2><p class="muted">Centang hal yang sudah Anda lakukan. Status tersimpan di perangkat ini.</p>
+<div id="checks">
+<label class="check"><input type="checkbox"> Saya memakai aplikasi WhatsApp Business resmi.</label>
+<label class="check"><input type="checkbox"> Penerima sudah memberi izin atau mengharapkan pesan saya.</label>
+<label class="check"><input type="checkbox"> Saya menghormati permintaan berhenti menerima promosi.</label>
+<label class="check"><input type="checkbox"> Isi pesan relevan, jujur, dan tidak menyesatkan.</label>
+<label class="check"><input type="checkbox"> Saya tidak memakai aplikasi modifikasi atau alat pengirim tidak resmi.</label>
+<label class="check"><input type="checkbox"> Saya mematuhi kebijakan WhatsApp Business dan aturan pesan.</label>
+</div><p id="checklistStatus" class="result">0 dari 6 checklist selesai.</p></div>
+<div class="card"><h2>Jika akun mendapat peringatan</h2><ol><li>Hentikan sementara aktivitas promosi yang memicu keluhan.</li><li>Buka WhatsApp Business resmi dan ikuti instruksi di dalam aplikasi.</li><li>Ajukan peninjauan melalui fitur resmi jika tersedia.</li><li>Jangan membayar jasa yang menjanjikan membuka blokir atau anti-banned.</li></ol></div>
+</section>
+<footer>WA BADAK • Aplikasi pendamping tidak resmi dan tidak berafiliasi dengan WhatsApp.</footer>
+</main>
+<script>
+const tabs=document.querySelectorAll('.nav button');
+tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')}));
+let checks=0;
+document.getElementById('runCheck').onclick=()=>{
+ const m=document.getElementById('msg').value.trim(),r=document.getElementById('recipient').value,p=document.getElementById('pace').value,out=document.getElementById('checkResult');
+ if(!m){out.textContent='Masukkan teks terlebih dahulu.';return;}
+ let notes=[];
+ if(r==='no')notes.push('Jangan kirim promosi kepada orang yang belum setuju atau tidak mengharapkannya.');
+ if(p==='high')notes.push('Kurangi frekuensi. Pesan berulang dapat mengganggu penerima.');
+ if(p==='bulk')notes.push('Hindari pengiriman massal yang tidak diminta. Gunakan fitur resmi sesuai kebijakan.');
+ if(/https?:\\/\\/|www\\./i.test(m))notes.push('Pastikan tautan benar, relevan, dan memang diharapkan penerima.');
+ if(/jamin|pasti kaya|100% berhasil|langsung sembuh|gratis selamanya/i.test(m))notes.push('Tinjau klaim mutlak atau janji yang dapat menyesatkan.');
+ if(/!!!{1,}|🔥{3,}|💸{2,}/u.test(m))notes.push('Kurangi tanda seru atau emoji berlebihan.');
+ if(!notes.length)notes.push('Tidak ditemukan pola mencolok pada pemeriksaan sederhana ini. Tetap pastikan penerima mengharapkan pesan.');
+ out.innerHTML='<b>'+((r==='no'||p==='bulk')?'Perlu perhatian khusus':'Hasil pemeriksaan')+'</b><ul>'+notes.map(n=>'<li>'+n+'</li>').join('')+'</ul><span class="muted">Ini bukan prediksi keputusan sistem WhatsApp dan bukan jaminan bebas spam atau banned.</span>';
+ checks++;document.getElementById('checkCount').textContent=checks;
+};
+document.getElementById('clearMsg').onclick=()=>{document.getElementById('msg').value='';document.getElementById('checkResult').textContent='Hasil pemeriksaan akan muncul di sini.'};
+let draft='';
+document.getElementById('makePromo').onclick=()=>{
+ const product=document.getElementById('product').value.trim(),benefit=document.getElementById('benefit').value.trim(),cta=document.getElementById('cta').value;
+ if(!product){document.getElementById('promoResult').textContent='Isi nama produk atau informasi terlebih dahulu.';return;}
+ draft='Halo Kak, izin berbagi informasi tentang '+product+'.'+(benefit?' '+benefit+'.':'')+' '+cta+' Terima kasih.';
+ document.getElementById('promoResult').textContent=draft;
+};
+document.getElementById('copyPromo').onclick=()=>{if(!draft)return; navigator.clipboard?.writeText(draft).then(()=>alert('Draf disalin.')).catch(()=>alert('Silakan salin draf secara manual.'))};
+const boxes=[...document.querySelectorAll('#checks input')];
+function updateChecks(){let n=boxes.filter(x=>x.checked).length;document.getElementById('doneCount').textContent=n+'/6';document.getElementById('checklistStatus').textContent=n+' dari 6 checklist selesai.';try{localStorage.setItem('wab_checks',JSON.stringify(boxes.map(x=>x.checked)))}catch(e){}}
+try{const saved=JSON.parse(localStorage.getItem('wab_checks')||'[]');boxes.forEach((x,i)=>x.checked=!!saved[i])}catch(e){}
+boxes.forEach(x=>x.addEventListener('change',updateChecks));updateChecks();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
