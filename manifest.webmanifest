@@ -1,0 +1,9 @@
+{
+  "name": "WA BADAK - Asisten WhatsApp Business",
+  "short_name": "WA BADAK",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f1f6f3",
+  "theme_color": "#075e45",
+  "description": "Asisten edukasi keamanan dan promosi WhatsApp Business"
+}
